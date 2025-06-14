@@ -1,1 +1,14 @@
+# Ignore everything
+*
+
+# …except this .gitignore file
+!.gitignore
+
+# …and the source directory (and everything inside it)
+!src/
+!src/**
+
+!.env
+
+# Still ignore macOS metadata
 .DS_Store

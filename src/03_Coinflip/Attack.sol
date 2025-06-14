@@ -7,7 +7,7 @@ pragma solidity >=0.8.2 <0.9.0;
  * @author DappScout
  * @notice deploy it on remix to the Sepolia testnet
  */
-contract Storage {
+contract Attack3 {
 
     uint256 FACTOR = 57896044618658097711785492504343953926634992332820282019728792003956564819968;
     address immutable i_owner;
@@ -20,7 +20,7 @@ contract Storage {
         i_owner = _i_owner;
     }
 
-    modifier onlyOwner public{
+    modifier onlyOwner{
         require(msg.sender == i_owner);
         _;
     }
@@ -53,7 +53,7 @@ contract Storage {
 
 
     ///@notice Funtion for automating the answer retriving and sending the call - manuall approach was too slow 
-    function submit() public returns onlyOwner (uint256) {
+    function submit() public onlyOwner returns(uint256) {
 
     bool guess = flip();
     (bool success, bytes memory returnData) = CONTRACT.call{value: 0}(abi.encodeWithSelector(bytes4(keccak256("flip(bool)")), guess));
