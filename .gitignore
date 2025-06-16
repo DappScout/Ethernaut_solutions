@@ -8,7 +8,7 @@
 !src/
 !src/**
 
-!.env
+!README.md
 
 # Still ignore macOS metadata
 .DS_Store

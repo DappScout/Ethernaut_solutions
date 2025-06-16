@@ -1,66 +1,29 @@
-## Foundry
+# Repo of my attack contracts for Ethernaut
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+## Notes
 
-Foundry consists of:
+### Level 08 - Vault
+    - First take the deployed contract address from the Ethernaut
+    - Then use the cast storage command to get the value stored at slot 1
+```bash
+cast storage 0x7f28d1dABCcCB4d88C305Ed18499aa6A8A1F8AD2 1 --rpc-url $SEPOLIA_RPC_URL 
+  |
+  |
+ \ /
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
-
-## Documentation
-
-https://book.getfoundry.sh/
-
-## Usage
-
-### Build
-
-```shell
-$ forge build
+0x412076657279207374726f6e67207365637265742070617373776f7264203a29
 ```
 
-### Test
-
-```shell
-$ forge test
+    - Next, we call the function unlock with the secret as the parameter:
+```bash
+cast send 0x7f28d1dABCcCB4d88C305Ed18499aa6A8A1F8AD2 "unlock(bytes32)" 0x412076657279207374726f6e67207365637265742070617373776f7264203a29 --rpc-url ...
 ```
+    - We can encode the parameter by using cast:
 
-### Format
+    ```bash
+cast to-ascii 0x412076657279207374726f6e67207365637265742070617373776f7264203a29
+                \/
+A very strong secret password :)
 
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+    ```
+    
