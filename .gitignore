@@ -12,3 +12,5 @@
 
 # Still ignore macOS metadata
 .DS_Store
+
+src/generate_attack.sh
