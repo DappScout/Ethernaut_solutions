@@ -1,4 +1,4 @@
-# Repo of my attack contracts for Ethernaut
+# Attack contracts and solutions for Ethernaut levels
 
 ## Notes
 
