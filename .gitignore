@@ -10,6 +10,8 @@
 
 !README.md
 
+lib
+
 # Still ignore macOS metadata
 .DS_Store
 
